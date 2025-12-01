@@ -1,0 +1,35 @@
+query GetMovies {
+  allMovies {
+    nodes {
+      id
+      title
+      imgUrl
+      releaseDate
+      movieReviewsByMovieId {
+        nodes {
+          id
+          title
+          body
+          rating
+          userReviewerId
+        }
+      }
+      userCreatorId
+    }
+  }
+}
+
+mutation CreateReview($title: String!, $body: String!, $rating: Int!, $movieId: UUID!, $userReviewerId: UUID!) {
+  createMovieReview(
+    input: {movieReview: {title: $title, body: $body, rating: $rating, movieId: $movieId, userReviewerId: $userReviewerId}}
+  ) {
+    movieReview {
+      id
+      title
+      body
+      rating
+      movieId
+      userReviewerId
+    }
+  }
+}
